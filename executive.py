@@ -10,7 +10,8 @@ class Executive:
     def run(self):
         """handles function calls and user input for the program"""
         boardgames = self.create_boardgames(self.file_name)
-        print(boardgames)
+        for game in boardgames:
+            print(str(game) + "\n")
 
         while True:
             self.display_menu()
@@ -47,7 +48,7 @@ class Executive:
 
         games = []
         for line in lines:
-            game_values = line.split()
+            game_values = line.split("\t")
             games.append(Boardgame(game_values[0], game_values[1], game_values[2],
                                    game_values[3], game_values[4], game_values[5]))
 
