@@ -3,7 +3,7 @@ from boardgame import Boardgame
 
 def display_menu():
     """Prints the user menu to the terminal"""
-    print("\n1. Print all games highest Gibbons rating to lowest")
+    print("1. Print all games highest Gibbons rating to lowest")
     print("2. Print all games from a year")
     print("3. Print all games with a weight equal to or lower than a provided weight")
     print("4. The People VS Dr. Gibbons")
@@ -32,16 +32,39 @@ def create_boardgames(file_name):
 def menu1(games):
     """Prints all games highest Gibbons rating to lowest"""
 
+    # Sorts games based on Gibbons ratings, and reverses the list to get highest to lowest
     games = sorted(games)
     games.reverse()
 
+    # Print all games
+    print("")
     for game in games:
         print(str(game))
 
 
 def menu2(games):
     """Obtains a year from the user and either print all the games from that year or print 'No games found'"""
-    pass
+
+    # Get year
+    while True:
+        try:
+            year = int(input("Enter a year: ").strip())
+            break
+        except ValueError:
+            print("That is not a valid year, try again...\n")
+
+    print(f"\nGames from the year {year}:\n")
+
+    # Print all games if they belong in year
+    at_least_one = False
+    for game in games:
+
+        if int(game.yearpublished) == year:
+            at_least_one = True
+            print(str(game))
+
+    if not at_least_one:
+        print("No games found\n")
 
 
 def menu3(games):
@@ -67,13 +90,16 @@ class Executive:
 
     def run(self):
         """handles function calls and user input for the program"""
+
+        # Create boardgames based on file
         boardgames = create_boardgames(self.file_name)
+        print("")
 
         while True:
             display_menu()
 
             # Get user input and handle queries
-            menu_choice = input("\nEnter a number 1-6 to choose\n")
+            menu_choice = input("\nEnter a number 1-6 to choose: ")
 
             match menu_choice:
 
@@ -81,7 +107,8 @@ class Executive:
                     menu1(boardgames)
 
                 case "2":
-                    pass
+                    menu2(boardgames)
+
                 case "3":
                     pass
                 case "4":
