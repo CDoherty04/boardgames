@@ -134,7 +134,35 @@ def menu4(games):
 
 def menu5(games):
     """Obtains a player count and prints all games that are best at said count"""
-    pass
+
+    # Get user input until a valid player count is given
+    while True:
+        try:
+            player_count = int(input("Enter an integer to represent the preferred player count: ").strip())
+            break
+
+        except ValueError:
+            print("That is not a valid player count, try entering an integer...\n")
+
+    print(f"\nGames with a preferred player count equal to {player_count}:\n")
+
+    # Print games that have a preferred player count equal to the given player count
+    at_least_one = False
+    for game in games:
+
+        # Preferred player counts are separated by commas in the tsv file
+        best_player_counts = game.bggbestplayers.split(",")
+
+        # So check for every preferred player count
+        for pc in best_player_counts:
+            if int(pc) == player_count:
+                at_least_one = True
+                print(str(game))
+                break
+
+    # Case that there are no games with said player count
+    if not at_least_one:
+        print("No games found\n")
 
 
 class Executive:
