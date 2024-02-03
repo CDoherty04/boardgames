@@ -70,7 +70,35 @@ def menu2(games):
 
 def menu3(games):
     """Obtains a weight (0-5) from the user and prints all games at or below that weight"""
-    pass
+
+    # Get user input until a valid weight is given
+    while True:
+        try:
+            weight = float(input("Enter a weight from 0-5 (weight represents the complexity of the game): ").strip())
+
+            # Check for valid range
+            if 0.0 <= weight <= 5.0:
+                break
+
+            else:
+                print("That is not within the range of 0-5, try again...\n")
+
+        except ValueError:
+            print("That is not a valid weight, try entering a decimal from 0-5...\n")
+
+    print(f"\nGames less complex or as complex as the weight value of {weight}:\n")
+
+    # Print all games if they belong in year
+    at_least_one = False
+    for game in games:
+
+        if float(game.avgweight) <= weight:
+            at_least_one = True
+            print(str(game))
+
+    # Case that there are no games published in a given year
+    if not at_least_one:
+        print("No games found\n")
 
 
 def menu4(games):
@@ -111,7 +139,8 @@ class Executive:
                     menu2(boardgames)
 
                 case "3":
-                    pass
+                    menu3(boardgames)
+
                 case "4":
                     pass
                 case "5":
@@ -120,7 +149,7 @@ class Executive:
                     break
                 case _:
                     print("\nEnter a valid number between 1 and 6")
-                    input("Press enter to continue...")
+                    input("Press enter to continue...\n")
 
         # Break message
         print("\nExiting...")
