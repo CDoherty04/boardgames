@@ -67,7 +67,7 @@ class Executive:
                     break
                 case _:
                     print("\nEnter a valid number between 1 and 6")
-                    input("Press enter to continue...\n")
+                    input("Press enter to continue...")
 
         # Break message
         print("\nExiting...")
