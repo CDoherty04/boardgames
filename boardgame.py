@@ -11,35 +11,36 @@ class Boardgame:
         self.bggbestplayers = bggbestplayers  # Best player count
 
     def __str__(self):
-        """Readable format"""
-        # Format player counts separated by commas (2,3) into 2 or 3
-        player_counts = self.bggbestplayers.split(",")
-        returned_str = ""
+        """
+        Readable format should look like the below entry
 
-        # One suggested player count formatted without commas or "or"s
-        if len(player_counts) == 1:
-            returned_str = player_counts[0]
+        ============
+        name
+        gibbonsrating
+        baverage
+        avgweight
+        yearpublished
+        bggbestplayers
+        ============
 
-        # Two suggested player count formatted without commas but with an "or"
-        elif len(player_counts) == 2:
-            returned_str = player_counts[0] + " or " + player_counts[1]
+        """
 
-        # More than two suggested player count formatted with commas and "or"s
-        else:
-            returned_str = player_counts[0]
-            for player in player_counts[1:]:
-                returned_str += ", " + player
-            # Inject "or" before the last number (3, 'or '4)
-            returned_str = returned_str[:-1] + "or " + returned_str[-1]
-
-        return (f"{self.name}, published in {self.yearpublished}, "
-                f"has a Gibbon's rating of: {self.grating}, "
-                f"an average rating on BGG of {self.avgrating}, "
-                f"a complexity of {self.avgweight}, and a best "
-                f"player count of {returned_str} player(s).")
+        return (f"============\n"
+                f"{self.name}\n"
+                f"{self.grating}\n"
+                f"{self.avgrating}\n"
+                f"{self.avgweight}\n"
+                f"{self.yearpublished}\n"
+                f"{self.bggbestplayers}\n"
+                f"============\n")
 
     def __repr__(self):
         """Official/background format"""
         return (f"boardgame.Boardgame({self.name}, {self.grating}, "
                 f"{self.avgrating}, {self.avgweight}, "
                 f"{self.yearpublished}, {self.bggbestplayers})")
+
+    def __lt__(self, other):
+        if float(self.grating) < float(other.grating):
+            return True
+        return False
