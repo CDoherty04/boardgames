@@ -45,7 +45,7 @@ def menu1(games):
 def menu2(games):
     """Obtains a year from the user and either print all the games from that year or print 'No games found'"""
 
-    # Get year
+    # Get user input until a valid year is given
     while True:
         try:
             year = int(input("Enter a year: ").strip())
@@ -63,6 +63,7 @@ def menu2(games):
             at_least_one = True
             print(str(game))
 
+    # Case that there are no games published in a given year
     if not at_least_one:
         print("No games found\n")
 
