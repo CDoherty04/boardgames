@@ -11,6 +11,7 @@ def display_menu():
     print("6. Exit the program")
 
 
+# todo Use pandas
 def create_boardgames(file_name):
     """Uses the Boardgame class to create a list of games"""
     with open(file_name, "r", encoding='utf8') as file:
@@ -55,7 +56,7 @@ def menu2(games):
 
     print(f"\nGames from the year {year}:\n")
 
-    # Print all games if they belong in year
+    # Print games that belong in the given year
     at_least_one = False
     for game in games:
 
@@ -63,7 +64,7 @@ def menu2(games):
             at_least_one = True
             print(str(game))
 
-    # Case that there are no games published in a given year
+    # Case that there are no games published in the given year
     if not at_least_one:
         print("No games found\n")
 
@@ -88,23 +89,47 @@ def menu3(games):
 
     print(f"\nGames less complex or as complex as the weight value of {weight}:\n")
 
-    # Print all games if they belong in year
-    at_least_one = False
+    # Print games that are less complex than given weight
+    # There is no case where no games are found
     for game in games:
 
         if float(game.avgweight) <= weight:
-            at_least_one = True
             print(str(game))
-
-    # Case that there are no games published in a given year
-    if not at_least_one:
-        print("No games found\n")
 
 
 def menu4(games):
     """Obtain a float (0-10) from the user and prints all games where the people's rating and Dr. Gibbons rating
     are separated by that much or more"""
-    pass
+
+    # Get user input until a valid rating is given
+    while True:
+        try:
+            prompt = "Enter a decimal buffer from 0-10 to separate the average rating from Dr. Gibbons rating: "
+            buffer = float(input(prompt).strip())
+
+            # Check for valid range
+            if 0.0 <= buffer <= 10.0:
+                break
+
+            else:
+                print("That is not within the range of 0-10, try again...\n")
+
+        except ValueError:
+            print("That is not a valid buffer, try entering a decimal from 0-10...\n")
+
+    print(f"\nGames with a buffer greater than {buffer}:\n")
+
+    # Print games that have a buffer greater than or equal to given buffer
+    at_least_one = False
+    for game in games:
+
+        if abs(float(game.avgrating) - float(game.grating)) >= buffer:
+            at_least_one = True
+            print(str(game))
+
+    # Case that there are no games with a larger buffer
+    if not at_least_one:
+        print("No games found\n")
 
 
 def menu5(games):
@@ -142,11 +167,14 @@ class Executive:
                     menu3(boardgames)
 
                 case "4":
-                    pass
+                    menu4(boardgames)
+
                 case "5":
-                    pass
+                    menu5(boardgames)
+
                 case "6":
                     break
+
                 case _:
                     print("\nEnter a valid number between 1 and 6")
                     input("Press enter to continue...\n")

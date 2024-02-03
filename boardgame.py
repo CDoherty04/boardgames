@@ -1,6 +1,7 @@
 class Boardgame:
     """Blueprint for the boardgames, initializing board game attributes,
     and creating __str__ and __repr__ methods for the games"""
+
     def __init__(self, name, gibbonsrating, baverage, avgweight,
                  yearpublished, bggbestplayers):
         self.name = name  # Name of the game
