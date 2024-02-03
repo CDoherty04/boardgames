@@ -29,6 +29,37 @@ def create_boardgames(file_name):
     return games
 
 
+def menu1(games):
+    """Prints all games highest Gibbons rating to lowest"""
+
+    games = sorted(games)
+    games.reverse()
+
+    for game in games:
+        print(str(game))
+
+
+def menu2(games):
+    """Obtains a year from the user and either print all the games from that year or print 'No games found'"""
+    pass
+
+
+def menu3(games):
+    """Obtains a weight (0-5) from the user and prints all games at or below that weight"""
+    pass
+
+
+def menu4(games):
+    """Obtain a float (0-10) from the user and prints all games where the people's rating and Dr. Gibbons rating
+    are separated by that much or more"""
+    pass
+
+
+def menu5(games):
+    """Obtains a player count and prints all games that are best at said count"""
+    pass
+
+
 class Executive:
     """In charge of reading file input, creating board game objects, printing the menu, and executing all queries"""
     def __init__(self, file_name):
@@ -47,13 +78,7 @@ class Executive:
             match menu_choice:
 
                 case "1":
-                    # Prints all games highest Gibbons rating to lowest
-
-                    boardgames = sorted(boardgames)
-                    boardgames.reverse()
-
-                    for game in boardgames:
-                        print(str(game))
+                    menu1(boardgames)
 
                 case "2":
                     pass
