@@ -3,13 +3,14 @@ Author: Charlie Doherty
 KUID: 3115329
 Date: 1/31/24
 Lab: 01
-Last modified: 1/31/24
+Last modified: 2/3/24
 Purpose: Refresh on EECS 168 concepts and familiarize self with tsv files
 """
 from executive import Executive
 
 if __name__ == "__main__":
 
+    # Runs until a valid file input is given
     while True:
 
         try:

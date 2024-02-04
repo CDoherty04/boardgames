@@ -1,9 +1,10 @@
 class Boardgame:
-    """Blueprint for the boardgames, initializing board game attributes,
-    and creating __str__ and __repr__ methods for the games"""
+    """Blueprint for the board games, initializing board game attributes,
+    and creating __str__ __repr__, and __lt__ methods for the objects"""
 
-    def __init__(self, name, gibbonsrating, baverage, avgweight,
-                 yearpublished, bggbestplayers):
+    def __init__(self, name, gibbonsrating, baverage, avgweight, yearpublished, bggbestplayers):
+        """Constructor for the Boardgame class with no default values given"""
+
         self.name = name  # Name of the game
         self.grating = gibbonsrating  # Gibbon's Rating
         self.avgrating = baverage  # Game Board Geek Average Rating
@@ -37,11 +38,14 @@ class Boardgame:
 
     def __repr__(self):
         """Official/background format"""
+
         return (f"boardgame.Boardgame({self.name}, {self.grating}, "
                 f"{self.avgrating}, {self.avgweight}, "
                 f"{self.yearpublished}, {self.bggbestplayers})")
 
     def __lt__(self, other):
+        """Less than magic method compares the Gibbons rating of both objects; intended to be used with sorted()"""
+
         if float(self.grating) < float(other.grating):
             return True
         return False

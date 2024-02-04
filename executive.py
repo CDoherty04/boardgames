@@ -1,4 +1,5 @@
 from boardgame import Boardgame
+from pandas import read_csv
 
 
 def display_menu():
@@ -11,9 +12,10 @@ def display_menu():
     print("6. Exit the program")
 
 
-# todo Use pandas
 def create_boardgames(file_name):
     """Uses the Boardgame class to create a list of games"""
+
+    # Take data from a given file and create a dataframe from it
     with open(file_name, "r", encoding='utf8') as file:
         lines = file.readlines()
 
@@ -21,6 +23,7 @@ def create_boardgames(file_name):
     lines = [line.strip() for line in lines]
     lines.pop(0)
 
+    # For every row, create a Boardgame object and place it in the returned dataframe
     games = []
     for line in lines:
         game_values = line.split("\t")
@@ -203,6 +206,7 @@ class Executive:
                 case "6":
                     break
 
+                # Default case that runs if an invalid input is given
                 case _:
                     print("\nEnter a valid number between 1 and 6")
                     input("Press enter to continue...\n")
